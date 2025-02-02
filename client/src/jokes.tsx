@@ -1,96 +1,110 @@
 import  { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios"; // Import AxiosError
 import Cookies from "js-cookie";
 import "./style/jokes.css";
 import { useNavigate } from "react-router-dom";
-const API = 'https://jokesgeneratorapi.onrender.com'
-function JokesPage() {
-  const [jokes, setJokes] = useState([]); // Holds jokes from the database
-  const [currentIndex, setCurrentIndex] = useState(0); // Tracks current joke index
-  const [loading, setLoading] = useState(true); // Tracks loading state
-  const [showModal, setShowModal] = useState(false); // Tracks modal visibility
-  const navigate = useNavigate();
 
-  // Fetch jokes from the server
-  useEffect(() => {
-    const fetchJokes = async () => {
-      try {
-        const response = await axios.get(`${API}/jokes`);
-        setJokes(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching jokes:", error);
-        setLoading(false);
-      }
+interface Joke {
+    _id: string;
+    text: string;
+    likes: number;
+    dislikes: number;
+}
+
+const API = 'https://jokesgeneratorapi.onrender.com';
+
+function JokesPage() {
+    const [jokes, setJokes] = useState<Joke[]>([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchJokes = async () => {
+            try {
+                const response = await axios.get<Joke[]>(`${API}/jokes`); // Type the response data
+                setJokes(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching jokes:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchJokes();
+    }, []);
+
+    const handleLike = async () => {
+        await handleInteraction("like");
     };
 
-    fetchJokes();
-  }, []);
+    const handleDislike = async () => {
+        await handleInteraction("dislike");
+    };
 
-  // Handle like button click
-  const handleLike = async () => {
-    await handleInteraction("like");
-  };
+    const handleSkip = () => {
+        handleInteraction("skip");
+    };
 
-  // Handle dislike button click
-  const handleDislike = async () => {
-    await handleInteraction("dislike");
-  };
+    const handleInteraction = async (interaction: string) => { // Type the interaction parameter
+        if (!jokes[currentIndex]) return; // Guard against undefined jokes[currentIndex]
 
-  // Handle skip button click
-  const handleSkip = () => {
-    handleInteraction("skip");
-  };
+        const currentJoke = jokes[currentIndex];
 
-  // Record interaction, update backend, and move to the next joke
-  const handleInteraction = async (interaction) => {
+        const interactions = JSON.parse(Cookies.get("jokeInteractions") || "{}");
+        interactions[currentJoke._id] = interaction;
+        Cookies.set("jokeInteractions", JSON.stringify(interactions), { expires: 7 });
+
+        if (interaction !== "skip") {
+            try {
+                await axios.post(`${API}/jokes/${currentJoke._id}/react`, { reaction: interaction });
+
+                const updatedJokes = [...jokes];
+                if (interaction === "like") {
+                    updatedJokes[currentIndex].likes += 1;
+                } else if (interaction === "dislike") {
+                    updatedJokes[currentIndex].dislikes += 1;
+                }
+                setJokes(updatedJokes);
+            } catch (error: unknown) { // Type the error
+                console.error(`Error sending ${interaction} to the backend:`, error);
+
+                if (error instanceof AxiosError) { // Use type guard
+                    console.error("Axios Error Details:", error.response?.data || error.message); // Log more details
+                } else if (error instanceof Error) {
+                    console.error("Standard Error Details:", error.message);
+                }
+
+            }
+        }
+
+        if (currentIndex < jokes.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        } else {
+            setShowModal(true);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        navigate("/");
+    };
+
+    if (loading) {
+        return <div>Loading jokes...</div>;
+    }
+
+    // Guard against undefined jokes[currentIndex] *after* loading check
+    if (!jokes[currentIndex]) {
+        return <div>No jokes available.</div>; // Or a more appropriate message
+    }
+
     const currentJoke = jokes[currentIndex];
 
-    // Save interaction to cookies
-    const interactions = JSON.parse(Cookies.get("jokeInteractions") || "{}");
-    interactions[currentJoke._id] = interaction;
-    Cookies.set("jokeInteractions", JSON.stringify(interactions), { expires: 7 });
 
-    // Send interaction to the backend
-    if (interaction !== "skip") {
-      try {
-        await axios.post(`${API}/jokes/${currentJoke._id}/react`, { reaction: interaction });
-
-        // Update local joke data with incremented count
-        const updatedJokes = [...jokes];
-        if (interaction === "like") {
-          updatedJokes[currentIndex].likes += 1;
-        } else if (interaction === "dislike") {
-          updatedJokes[currentIndex].dislikes += 1;
-        }
-        setJokes(updatedJokes);
-      } catch (error) {
-        console.error(`Error sending ${interaction} to the backend:`, error);
-      }
-    }
-
-    // Move to the next joke
-    if (currentIndex < jokes.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setShowModal(true); // Show the modal when all jokes are rated
-    }
-  };
-
-  // Close the modal and redirect to the main route
-  const handleCloseModal = () => {
-    setShowModal(false);
-    navigate("/"); // Redirect to the main route
-  };
-
-  if (loading) {
-    return <div>Loading jokes...</div>;
-  }
-
-  const currentJoke = jokes[currentIndex];
-
-  return (
-    <div id="container">
+    return (
+        <div id="container">
       {showModal && (
         <div className="modal">
           <div className="modal-content">
