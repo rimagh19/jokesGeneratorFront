@@ -1,14 +1,10 @@
-
-import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; // Import Link
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; 
 import { StrictMode } from 'react';
 import App from './App';
 import Jokes from './jokes';
 import Add from './Add';
-import './style/index.css'; // Import your CSS file
-// const s = import.meta.env.API
-// console.log(s)
+import './style/index.css'; 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <Router>

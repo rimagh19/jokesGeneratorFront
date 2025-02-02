@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
+import  { useState, FormEvent } from "react";
+import axios, { AxiosRequestConfig } from "axios"; // Import AxiosRequestConfig
 import Cookies from "js-cookie";
 import "./style/Add.css";
 import { useNavigate } from "react-router-dom";
-
-
 const API = 'https://jokesgeneratorapi.onrender.com'
 function Add() {
     const [jokeText, setJokeText] = useState("");
@@ -12,32 +10,32 @@ function Add() {
     const [formVisible, setFormVisible] = useState(true); // State for form visibility
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => { // Type the event parameter
         e.preventDefault();
 
         try {
             const token = Cookies.get("token");
-            const headers = token ? { Authorization: `Bearer ${token}` } : {};
+            const headers: AxiosRequestConfig['headers'] = token ? { Authorization: `Bearer ${token}` } : undefined; // Type the headers object
 
             const response = await axios.post(`${API}/jokes`, {
                 text: jokeText,
-            }, headers);
+            }, { headers }); // Pass headers as an object
 
             console.log("Joke submitted successfully:", response.data);
             setJokeText("");
-            setFormVisible(false); // Hide the form
+            setFormVisible(false);
             setShowModal(true);
 
-        } catch (error) {
+        } catch (error: any) { // Type the error as any for now (or use a type guard later)
             console.error("Error submitting joke:", error);
-            if (error.response) {
-                alert(error.response.data.message);
+            const err = error as any;
+            if (err.response) {
+                alert(err.response.data.message);
             } else {
                 alert("An error occurred while submitting the joke.");
             }
         }
     };
-
     const handleCloseModal = () => {
         setShowModal(false);
         setFormVisible(true); // Show the form again (if needed)
@@ -64,7 +62,6 @@ function Add() {
                             value={jokeText}
                             onChange={(e) => setJokeText(e.target.value)}
                             placeholder="أدخل النكتة هنا..."
-                            rows="5"
                             required
                         />
                         <div></div>
