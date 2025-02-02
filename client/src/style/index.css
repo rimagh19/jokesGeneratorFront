@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Rakkas'; /* Name your font family */
-  src: url('../public/Rakkas-Regular.ttf'); /* Locate the .ttf file within your directory*/
+  src: url('../public/Rakkas-Regular.ttf')  format('truetype');
 }
 @font-face {
   font-family: 'Camel'; /* Name your font family */
@@ -113,17 +113,4 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
