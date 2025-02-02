@@ -1,17 +1,19 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
-import "./App.css";
+import "./style/App.css";
 
 function App() {
-  // const [count, setCount] = useState(0);
   const navigate = useNavigate();
 
   const handleStartButtonClick = () => {
     navigate('/jokes'); 
   };
+  const handleAddButtonClick = () =>{
+    navigate('/add'); 
+  }
 
   return (
     <>
@@ -23,7 +25,7 @@ function App() {
             يلا نبدأ 
           </button> 
 
-          <button className="btn-main add-btn" disabled>
+          <button className="btn-main add-btn" onClick={handleAddButtonClick}>
             اضيف نكتة
           </button>
         </div>

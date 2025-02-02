@@ -1,0 +1,60 @@
+/* jokes.css */
+.add-joke-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full viewport height */
+    padding: 20px;
+    background-color: #f4f4f4; /* Light background color */
+    font-family: sans-serif; /* Modern font */
+}
+
+.add-joke-title {
+    color: #333; /* Dark title color */
+    margin-bottom: 20px;
+}
+
+.add-joke-form {
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Set a maximum width */
+    background-color: #fff; /* White form background */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.add-joke-textarea {
+    width: 50%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 10px;
+    resize: vertical; /* Allow vertical resizing */
+    font-size: 16px; /* Readable font size */
+    font-family: sans-serif;
+
+}
+
+.add-joke-button {
+    background-color: var(--light); /* Darker blue on hover */
+    color: var(--dark-green)
+}
+
+.add-joke-button:hover {
+    background-color: var(--dark-green); /* Darker blue on hover */
+    color: var(--light)
+}
+
+/* Responsive adjustments (example) */
+@media (max-width: 400px) {
+    .add-joke-form {
+        width: 95%; /* Full width on small screens */
+    }
+}
+
+body{
+    font-family: 'Camel';
+    
+
+}

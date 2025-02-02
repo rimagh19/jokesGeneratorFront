@@ -10,6 +10,28 @@
   font-family: 'CamelBold'; /* Name your font family */
   src: url('../public/camel-ExtraBold.otf'); /* Locate the .ttf file within your directory*/
 }
+.navbar {
+  background-color: transparent;
+  color: var(--light);
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: space-between; /* Key: Space between items */
+  align-items: center;
+  position: sticky; /* or fixed if you want it always on top */
+  top: 0;
+  z-index: 100;
+  width: 100%; /* Ensure full width */
+  position: absolute;
+  font-size: 1.5rem;
+  font-family: "Rakkas";
+}
+#logo{
+  width: 3rem;
+}
+.navbar-content{
+  display: flex;
+  align-items: center; /* Vertically center items */
+}
 footer {
   position: fixed;
   bottom: 0;

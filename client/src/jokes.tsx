@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import "./jokes.css";
+import "./style/jokes.css";
 import { useNavigate } from "react-router-dom";
-
+const API = 'https://jokesgeneratorapi.onrender.com'
 function JokesPage() {
   const [jokes, setJokes] = useState([]); // Holds jokes from the database
   const [currentIndex, setCurrentIndex] = useState(0); // Tracks current joke index
@@ -15,7 +15,7 @@ function JokesPage() {
   useEffect(() => {
     const fetchJokes = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/jokes");
+        const response = await axios.get(`${API}/jokes`);
         setJokes(response.data);
         setLoading(false);
       } catch (error) {
@@ -54,7 +54,7 @@ function JokesPage() {
     // Send interaction to the backend
     if (interaction !== "skip") {
       try {
-        await axios.post(`http://localhost:4000/jokes/${currentJoke._id}/react`, { reaction: interaction });
+        await axios.post(`${API}/jokes/${currentJoke._id}/react`, { reaction: interaction });
 
         // Update local joke data with incremented count
         const updatedJokes = [...jokes];
