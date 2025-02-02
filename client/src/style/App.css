@@ -103,3 +103,48 @@
 .read-the-docs {
   color: #888;
 }
+
+
+
+@media (max-width: 450px) {
+  body{
+    width: 100%;
+    overflow-x: hidden; 
+    overflow-y: hidden; 
+  }
+  #title {
+      font-size: 3rem ;
+  }
+  #desc{
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+  .inner{
+    width: 50%;
+  }
+  .inner-right{
+    margin: 5rem 2rem 0rem 1rem;
+  }
+  .inner-left{
+    margin:3rem  1rem 0rem 1rem;
+  }
+  .img-boy{
+    width: 20rem;
+  }
+  .btn-main{
+    margin: 0;
+    width: 9rem;
+  }
+  #btn-main-holder{
+    width: 40%;
+    margin: 2rem 0rem 0rem 0rem;
+    padding: 0;
+  }
+  #root {
+
+    display: block;
+
+  }
+
+
+}

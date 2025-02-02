@@ -114,3 +114,24 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+
+@media (max-width: 450px) {
+  .navbar {
+      font-size: 0.9rem ;
+  }
+
+  footer {
+      font-size: 0.7rem;
+  }
+
+  h1 {
+      font-size: 1.8em;
+  }
+
+  button {
+      font-size: 0.8em;
+      padding: 0.4em 0.9em;
+  }
+
+}
