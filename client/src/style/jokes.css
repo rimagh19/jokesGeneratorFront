@@ -40,7 +40,7 @@ body{
 .btn{
     background-color: var(--light);
     border-radius: 3rem;
-    width: 10rem;
+    width: 13rem;
     margin: 0 1rem;
     color: VAR(--dark-green);
 }
