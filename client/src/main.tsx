@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")!).render(
         <Router>
             <nav className="navbar">  {/* Navbar */}
                 <div className="navbar-content"> {/* Content wrapper for better alignment */}
-                    <img src="../public/logo.png" id="logo"></img>
+                    <img src="../static/logo.png" id="logo"></img>
                     <Link to="/" className="navbar-brand">نـــكـتـــة</Link> {/* App Name/Logo */}
                 </div>
             </nav>

@@ -1,14 +1,14 @@
 @font-face {
   font-family: 'Rakkas'; /* Name your font family */
-  src: url('../public/Rakkas-Regular.ttf')  format('truetype');
+  src: url('../static/Rakkas-Regular.ttf')  format('truetype');
 }
 @font-face {
   font-family: 'Camel'; /* Name your font family */
-  src: url('../public/camel.otf'); /* Locate the .ttf file within your directory*/
+  src: url('../static/camel.otf'); /* Locate the .ttf file within your directory*/
 }
 @font-face {
   font-family: 'CamelBold'; /* Name your font family */
-  src: url('../public/camel-ExtraBold.otf'); /* Locate the .ttf file within your directory*/
+  src: url('../static/camel-ExtraBold.otf'); /* Locate the .ttf file within your directory*/
 }
 .navbar {
   background-color: transparent;

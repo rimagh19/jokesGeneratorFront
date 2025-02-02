@@ -27,7 +27,7 @@ function App() {
         </div>
       </div>
       <div className="inner inner-left">
-        <img src="../public/bg.png"></img>
+        <img src="../static/bg.png"></img>
       </div>
     </>
   );
