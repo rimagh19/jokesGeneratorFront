@@ -1,0 +1,105 @@
+#root {
+  max-width: 1280px;
+  min-width: 100rem;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between; /* Push the inner divs to opposite ends */
+  align-items: center; /* Aligns items vertically */
+}
+
+.inner{
+  /* background-color: bisque; */
+  width: 100%;
+  margin: 1rem;
+  text-align: right;
+}
+
+.inner-right{
+  margin-right: 5rem;
+  margin-bottom: 10rem;
+}
+.inner-left{
+  margin-left: 5rem;
+}
+#title{
+  font-size: 12rem;
+  margin: 0;
+  font-family: 'Rakkas';
+}
+#btn-main-holder{
+  margin-top: 2rem;
+  width: 70%;
+  display: flex;
+  justify-content:space-around; /* Push the inner divs to opposite ends */
+  align-items: center; /* Aligns items vertically */
+}
+#desc{
+  width: 70%;
+  font-size: 2.7rem;
+  margin: 0;
+  line-height: 1.25;
+  font-family: 'Camel';
+
+
+}
+.btn-main{
+  border-radius: 33rem;
+  margin:auto 1rem;
+  width: 12rem;
+  height: 3rem;
+  font-size: 1.3rem;
+  font-family: 'Camel';
+
+}
+.name{
+  font-family: 'Rakkas' !important;
+  color: var(--dark);
+}
+.start-btn{
+  background-color: var(--light);
+  color: var(--dark)
+
+}
+
+.add-btn{
+  background-color: var(--dark);
+ color: var(--light)
+
+}
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
